@@ -1,0 +1,18 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-py"
+}
+
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://dandiggas:dandiggas@localhost:5432/dandiggas"
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price String
+}
