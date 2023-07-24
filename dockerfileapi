@@ -15,7 +15,7 @@ COPY api.py .
 RUN pip install gunicorn
 
 # Expose the port that the web server will listen on
-EXPOSE 8000
+EXPOSE 5000
 
 # Start the web server with Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:api"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:api"]
