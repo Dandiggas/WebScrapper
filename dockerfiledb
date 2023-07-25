@@ -1,17 +1,13 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-alpine
+# Use an appropriate base image for PostgreSQL
+FROM postgres:latest
 
-# Set the working directory in the container to /app
-WORKDIR /app
+# Set environment variables for PostgreSQL configuration
+ENV POSTGRES_USER prisma
+ENV POSTGRES_PASSWORD prisma
+ENV POSTGRES_DB prisma
 
-# Add the current directory contents into the container at /app
-COPY . /app
+# Copy the SQL script or schema file to initialize the database (if needed)
+COPY init.sql /docker-entrypoint-initdb.d/
 
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
-
-# Generate Prisma Client
-RUN prisma generate
-
-# Run db.py when the container launches
-CMD ["python", "db.py"]
+# Expose the default PostgreSQL port (5432)
+EXPOSE 5432
