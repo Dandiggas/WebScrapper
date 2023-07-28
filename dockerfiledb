@@ -6,8 +6,5 @@ ENV POSTGRES_USER prisma
 ENV POSTGRES_PASSWORD prisma
 ENV POSTGRES_DB prisma
 
-# Copy the SQL script or schema file to initialize the database (if needed)
-COPY init.sql /docker-entrypoint-initdb.d/
-
 # Expose the default PostgreSQL port (5432)
 EXPOSE 5432
