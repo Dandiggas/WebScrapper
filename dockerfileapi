@@ -1,0 +1,24 @@
+# Use the official Python base image
+FROM python:3.9-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy the Flask app code into the container
+COPY api.py .
+
+# Generate Prisma Client
+RUN prisma generate
+
+# Install Gunicorn
+RUN pip install gunicorn
+
+# Expose the port that the web server will listen on
+EXPOSE 8080
+
+# Start the web server with Gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:api"]

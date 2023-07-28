@@ -1,0 +1,41 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: dockerfileapi
+    ports:
+      - "8080:8080"
+    depends_on:
+      - scraper
+
+  scraper:
+    build:
+      context: .
+      dockerfile: dockerfilewebscrapper
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - prisma
+
+  db:
+    build:
+      context: .
+      dockerfile: dockerfiledb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  prisma:
+    build:
+      context: .
+      dockerfile: dockerfileprisma
+    volumes:
+      - .:/app/prisma
+    depends_on:
+      - db 
+
+
+volumes:
+  db-data:

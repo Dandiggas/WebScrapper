@@ -1,0 +1,10 @@
+# Use an appropriate base image for PostgreSQL
+FROM postgres:latest
+
+# Set environment variables for PostgreSQL configuration
+ENV POSTGRES_USER prisma
+ENV POSTGRES_PASSWORD prisma
+ENV POSTGRES_DB prisma
+
+# Expose the default PostgreSQL port (5432)
+EXPOSE 5432
