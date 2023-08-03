@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy the requirements file and install dependencies
 COPY requirements.txt .
 RUN pip install -r requirements.txt
+RUN apk add --update --no-cache nodejs
 
 # Copy the Flask app code into the container
 COPY api.py .
@@ -21,4 +22,4 @@ RUN pip install gunicorn
 EXPOSE 8080
 
 # Start the web server with Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:api"]
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "api:app"]
